@@ -1,0 +1,31 @@
+{
+  "name": "3DFramework",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "hot": "webpack-dev-server --config webpack.dev.js --open chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.4.0",
+    "dat.gui": "^0.7.6",
+    "opentype.js": "^1.1.0",
+    "screenfull": "^4.2.0",
+    "signals": "^1.0.0",
+    "three": "^0.98.0"
+  }
+}

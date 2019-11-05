@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>PHANTOM3</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/wrj.css" />
+    <style>
+        html,
+        body
+        {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: url(img/wrj/bg.jpg) no-repeat;
+            background-size: 100% 100%;
+            background-position: center center;
+        }
+
+        @media screen and (min-width: 1024px)
+        {
+            html,
+            body
+            {
+                background-image: url(img/wrj/bg-pc.jpg);
+            }
+        }
+    </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/adapt.js"></script>
+    <script>
+        var Api = {
+            prefix: '',
+            removeLogo: true
+        };
+
+        var paths = {
+            m: ['u3d/wurenji/models/m_part1.json', 'u3d/wurenji/models/m_part2.json', 'u3d/wurenji/models/m_part3.json'],
+            s: 'u3d/wurenji/tm.txt',
+            t: [
+                'u3d/wurenji/textures/t_1.txt',
+                'u3d/wurenji/textures/t_2.txt',
+                'u3d/wurenji/textures/t_3.txt',
+                'u3d/wurenji/textures/t_4.txt',
+                'u3d/wurenji/textures/t_5.txt',
+                'u3d/wurenji/textures/t_6.txt',
+                'u3d/wurenji/textures/t_7.txt'
+            ],
+            a: 'u3d/wurenji/animations/a_1.json',
+            e: ['u3d/wurenji/envmap/e.txt', 'u3d/wurenji/envmap/e1.txt']
+            //[
+            //    {
+            //        'name': 'skybox',
+            //        'urls': ['u3d/wurenji/envmap/e/px.hdr', 'u3d/wurenji/envmap/e/nx.hdr', 'u3d/wurenji/envmap/e/py.hdr', 'u3d/wurenji/envmap/e/ny.hdr', 'u3d/wurenji/envmap/e/pz.hdr', 'u3d/wurenji/envmap/e/nz.hdr']
+            //    },
+            //    {
+            //        'name': '22148',
+            //        'urls': ['u3d/wurenji/envmap/e1/px.hdr', 'u3d/wurenji/envmap/e1/nx.hdr', 'u3d/wurenji/envmap/e1/py.hdr', 'u3d/wurenji/envmap/e1/ny.hdr', 'u3d/wurenji/envmap/e1/pz.hdr', 'u3d/wurenji/envmap/e1/nz.hdr']
+            //    }
+            //]
+        };
+    </script>
+</head>
+<body>
+    <!-- 加载页 -->
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <img src="img/wrj/loading.png" alt="">
+                <h2><span id="pecentageWidth" style="width: 0%"></span></h2>
+                <em id="pecentageText">LOADING...</em>
+            </div>
+        </div>
+    </div>
+    <div class="container model-detail">
+        <!-- 模型放里面 -->
+        <div class="modelbox" id="mainContainer">
+        </div>
+        <!-- 热点 -->
+        <ul class="hotlist">
+        </ul>
+        <!-- 主页按钮 -->
+        <a href="" class="backhome">
+            <img src="img/wrj/zhuye.png" alt="">
+        </a>
+        <!-- 底部操作按钮 -->
+        <ul class="bottomtablist clearfix">
+            <li class="xjzs active">
+                <img src="img/wrj/xjzs.png" alt="">
+                <img src="img/wrj/xjzsactive.png" alt="" class="activeimg">
+            </li>
+            <li class="yssz">
+                <img src="img/wrj/yssz.png" alt="">
+                <img src="img/wrj/ysszactive.png" alt="" class="activeimg">
+            </li>
+            <li class="xjpz">
+                <img src="img/wrj/xjpz.png" alt="">
+                <img src="img/wrj/xjpzactive.png" alt="" class="activeimg">
+            </li>
+            <li class="bwth">
+                <img src="img/wrj/bwth.png" alt="">
+                <img src="img/wrj/bwthactive.png" alt="" class="activeimg">
+            </li>
+            <li class="ddfh">
+                <img src="img/wrj/ddfh.png" alt="">
+                <img src="img/wrj/ddfhactive.png" alt="" class="activeimg">
+            </li>
+        </ul>
+        <!-- 细节展示 -->
+        <ul class="optionlist clearfix xjlist">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!-- 顶部logo -->
+        <div class="toplogo">
+            <img src="img/wrj/toppic.png" alt="">
+        </div>
+        <div class="textexplan">
+            <h3></h3>
+            <h4></h4>
+        </div>
+        <!-- 颜色设置 -->
+        <ul class="optionlist clearfix colorlist">
+            <li class="kxh active">炫酷黑</li>
+            <li class="ssb">舒适白</li>
+            <li class="llc">靓丽橙</li>
+        </ul>
+        <div class="optionlist paizhao">
+            <img src="img/wrj/pz.png" alt="" onclick="take_snapshot()">
+        </div>
+        <!-- 右边操作按钮 -->
+        <ul class="optionlist rightlist">
+            <li class="rightli">
+                <img src="img/wrj/bhz.png" alt="">
+                <ul class="rightliul bhzlist clearfix">
+                    <div class="active">
+                        <img src="img/wrj/bhz01.png" alt="">
+                        <img src="img/wrj/bhz01active.png" alt="" class="actimg">
+                    </div>
+                    <div>
+                        <img src="img/wrj/bhz02.png" alt="">
+                        <img src="img/wrj/bhz02active.png" alt="" class="actimg">
+                    </div>
+                </ul>
+            </li>
+            <li class="rightli">
+                <img src="img/wrj/camaro.png" alt="">
+                <ul class="rightliul cmrlist clearfix">
+                    <div class="active">
+                        <img src="img/wrj/xj01.png" alt="">
+                        <img src="img/wrj/xj01active.png" alt="" class="actimg">
+                    </div>
+                    <div>
+                        <img src="img/wrj/xj02.png" alt="">
+                        <img src="img/wrj/xj02active.png" alt="" class="actimg">
+                    </div>
+                    <div>
+                        <img src="img/wrj/xj03.png" alt="">
+                        <img src="img/wrj/xj03active.png" alt="" class="actimg">
+                    </div>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- 电量过低 -->
+        <div class="nopower">
+            <img src="img/wrj/dlyj.png" alt="" class="mobileimg">
+            <img src="img/wrj/dlyj-pc.png" alt="" class="pcimg">
+        </div>
+        <!-- 照片弹窗 -->
+        <div class="poppic" id="poppic">
+            <div id="my_camera" style="position: absolute;"></div>
+            <div id="results" class="results">
+            </div>
+        </div>
+    </div>
+    <script src="js/webcam.js"></script>
+    <script>
+        Webcam.set({
+            width: 750,
+            height: 1334,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+
+        var isMoblie = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        $('.backhome').attr('href', isMoblie ? 'https://m.laozicloud.com/appUser/index' : 'https://www.laozicloud.com/spweb/caseList');
+    </script>
+    <script>
+        function take_snapshot() {
+            Webcam.snap(function (data_uri) {
+                document.getElementById('poppic').style.display = "block";
+                document.getElementById('results').innerHTML =
+                    '<img src="' + data_uri + '"/>';
+            });
+        }
+    </script>
+</body>
+</html>

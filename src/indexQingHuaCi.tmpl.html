@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D仿真移动交互–迈向中国制造2025</title>
+    <link href="css/commonDemo.css" rel="stylesheet" />
+    <link href="css/sm.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        var Api = {
+            prefix: '',
+            useHDR: true,
+            autoRotate: true,
+            bgMusic: 'sound/BgMusic.mp3',
+            customLogo: 'img/customLogo.png'
+        };
+    </script>
+</head>
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <em id="pecentageText">0%</em>
+                <h2><span id="pecentageWidth"></span></h2>
+                <p class="Load-Sketch">瑛诺三维科技，科技文博</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-group" style="background: none;">
+        <div class="page page-current" style="background: none;" id="mainContainer">
+            <ul class="gray-model-list" style="z-index: 2;">
+                <!--                <li id="btn-switchAutoRotate" class="line-btn active">
+                    <img src="img/zt.png" />
+                </li>-->
+                <li id="btn-switchMusic" class="line-btn active">
+                    <img src="img/music-switch.png" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

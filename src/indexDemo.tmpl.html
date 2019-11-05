@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D仿真移动交互–迈向中国制造2025</title>
+    <link href="css/commonDemo.css" rel="stylesheet" />
+    <link href="css/sm.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        var Api = {
+            prefix: '',
+            scaleFactor: 1.5,
+            initYFactor: 0.5,
+            useHDR:true,
+            removeLogo:true
+        };
+        var pathConfig = {
+            'lvxingxiang':
+            {
+                m: 'u3d/lvxingxiang/models/m.json',
+                s: 'u3d/lvxingxiang/tm.txt',
+                t: [
+                    'u3d/lvxingxiang/textures/t_1.txt',
+                    'u3d/lvxingxiang/textures/t_2.txt',
+                    'u3d/lvxingxiang/textures/t_3.txt',
+                    'u3d/lvxingxiang/textures/t_4.txt',
+                    'u3d/lvxingxiang/textures/t_5.txt',
+                    'u3d/lvxingxiang/textures/t_6.txt',
+                    'u3d/lvxingxiang/textures/t_7.txt',
+                    'u3d/lvxingxiang/textures/t_8.txt'
+                ],
+                e: 'u3d/lvxingxiang/envmap/e.exr'
+            },
+            'kouhong':
+            {
+                m: 'u3d/kouhong/models/m.json',
+                s: 'u3d/kouhong/tm.txt',
+                t: [
+                    'u3d/kouhong/textures/t_1.txt',
+                    'u3d/kouhong/textures/t_2.txt',
+                    'u3d/kouhong/textures/t_3.txt',
+                    'u3d/kouhong/textures/t_4.txt',
+                    'u3d/kouhong/textures/t_5.txt',
+                    'u3d/kouhong/textures/t_6.txt',
+                    'u3d/kouhong/textures/t_7.txt'
+                ],
+                a: 'u3d/kouhong/animations/a_1.json',
+                e: 'u3d/kouhong/envmap/e.exr'
+            },
+            'hongjiu':
+             {
+                 m: 'u3d/hongjiu/models/m.json',
+                 s: 'u3d/hongjiu/tm.txt',
+                 t: [
+                     'u3d/hongjiu/textures/t_1.txt',
+                     'u3d/hongjiu/textures/t_2.txt',
+                     'u3d/hongjiu/textures/t_3.txt'
+                 ],
+                 e: [
+                     {
+                         'name': 'skybox',
+                         'urls': ['u3d/hongjiu/envmap/hdr/px.hdr', 'u3d/hongjiu/envmap/hdr/nx.hdr', 'u3d/hongjiu/envmap/hdr/py.hdr', 'u3d/hongjiu/envmap/hdr/ny.hdr', 'u3d/hongjiu/envmap/hdr/pz.hdr', 'u3d/hongjiu/envmap/hdr/nz.hdr']
+                     },
+                    {
+                        'name': '77106',
+                        'urls': ['u3d/hongjiu/envmap/hdr1/px.hdr', 'u3d/hongjiu/envmap/hdr1/nx.hdr', 'u3d/hongjiu/envmap/hdr1/py.hdr', 'u3d/hongjiu/envmap/hdr1/ny.hdr', 'u3d/hongjiu/envmap/hdr1/pz.hdr', 'u3d/hongjiu/envmap/hdr1/nz.hdr']
+                    }
+                 ]
+             },
+            'test': {
+                m: 'u3d/Z6/models/m.json',
+                s: 'u3d/Z6/tm.txt',
+                t: [
+                    'u3d/Z6/textures/t_1.txt',
+                    'u3d/Z6/textures/t_2.txt',
+                    'u3d/Z6/textures/t_3.txt',
+                    'u3d/Z6/textures/t_4.txt'
+                ],
+                e: [
+                    {
+                        'name': 'skybox',
+                        'urls': ['u3d/Z6/envmap/e/px.hdr', 'u3d/Z6/envmap/e/nx.hdr', 'u3d/Z6/envmap/e/py.hdr', 'u3d/Z6/envmap/e/ny.hdr', 'u3d/Z6/envmap/e/pz.hdr', 'u3d/Z6/envmap/e/nz.hdr']
+                    },
+                    {
+                        'name': '14172',
+                        'urls': ['u3d/Z6/envmap/e1/px.hdr', 'u3d/Z6/envmap/e1/nx.hdr', 'u3d/Z6/envmap/e1/py.hdr', 'u3d/Z6/envmap/e1/ny.hdr', 'u3d/Z6/envmap/e1/pz.hdr', 'u3d/Z6/envmap/e1/nz.hdr']
+                    }
+                ]
+            },
+            'danrenyi': {
+                m: ['u3d/test/models/m_part1.json', 'u3d/test/models/m_part2.json'],
+                s: 'u3d/test/tm.txt',
+                a: 'u3d/test/animations/a_1.json',
+                t: [
+                    'u3d/test/textures/t_1.txt',
+                    'u3d/test/textures/t_2.txt',
+                    'u3d/test/textures/t_3.txt'
+                ],
+                e: 'u3d/test/envmap/e.txt'
+            },
+            'tixudao': {
+                m: ['u3d/tixudao/models/m_part1.json', 'u3d/tixudao/models/m_part2.json', 'u3d/tixudao/models/m_part3.json', 'u3d/tixudao/models/m_part4.json', 'u3d/tixudao/models/m_part5.json', 'u3d/tixudao/models/m_part6.json', 'u3d/tixudao/models/m_part7.json', 'u3d/tixudao/models/m_part8.json', 'u3d/tixudao/models/m_part9.json', 'u3d/tixudao/models/m_part10.json', 'u3d/tixudao/models/m_part11.json', 'u3d/tixudao/models/m_part12.json', 'u3d/tixudao/models/m_part13.json'],
+                s: 'u3d/tixudao/tm.txt',
+                t: [
+                    'u3d/tixudao/textures/t_1.txt'
+                ],
+                e:
+                [
+                    {
+                        'name': 'skybox',
+                        'urls': ['u3d/tixudao/envmap/e/px.hdr', 'u3d/tixudao/envmap/e/nx.hdr', 'u3d/tixudao/envmap/e/py.hdr', 'u3d/tixudao/envmap/e/ny.hdr', 'u3d/tixudao/envmap/e/pz.hdr', 'u3d/tixudao/envmap/e/nz.hdr']
+                    },
+                    {
+                        'name': '20526',
+                        'urls': ['u3d/tixudao/envmap/e1/px.hdr', 'u3d/tixudao/envmap/e1/nx.hdr', 'u3d/tixudao/envmap/e1/py.hdr', 'u3d/tixudao/envmap/e1/ny.hdr', 'u3d/tixudao/envmap/e1/pz.hdr', 'u3d/tixudao/envmap/e1/nz.hdr']
+                    },
+                    {
+                        'name': '14374',
+                        'urls': ['u3d/tixudao/envmap/e2/px.hdr', 'u3d/tixudao/envmap/e2/nx.hdr', 'u3d/tixudao/envmap/e2/py.hdr', 'u3d/tixudao/envmap/e2/ny.hdr', 'u3d/tixudao/envmap/e2/pz.hdr', 'u3d/tixudao/envmap/e2/nz.hdr']
+                    },
+                    {
+                        'name': '14994',
+                        'urls': ['u3d/tixudao/envmap/e3/px.hdr', 'u3d/tixudao/envmap/e3/nx.hdr', 'u3d/tixudao/envmap/e3/py.hdr', 'u3d/tixudao/envmap/e3/ny.hdr', 'u3d/tixudao/envmap/e3/pz.hdr', 'u3d/tixudao/envmap/e3/nz.hdr']
+                    },
+                    {
+                        'name': '30910',
+                        'urls': ['u3d/tixudao/envmap/e4/px.hdr', 'u3d/tixudao/envmap/e4/nx.hdr', 'u3d/tixudao/envmap/e4/py.hdr', 'u3d/tixudao/envmap/e4/ny.hdr', 'u3d/tixudao/envmap/e4/pz.hdr', 'u3d/tixudao/envmap/e4/nz.hdr']
+                    }
+                ]
+            }
+        };
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
+            }
+            return null;
+        }
+
+        var modelName = 'tixudao';
+        if (window.location.search) {
+            modelName = GetQueryString('mn');
+        }
+
+        if (modelName && !pathConfig[modelName]) {
+            modelName = 'tixudao';
+        }
+        var paths = pathConfig[modelName];
+    </script>
+</head>
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <em id="pecentageText">0%</em>
+                <h2><span id="pecentageWidth"></span></h2>
+                <p class="Load-Sketch">加载中,请稍候...</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-group" style="background: none;">
+        <div class="page page-current" style="background: none;" id="mainContainer">
+            <!-- 这里是页面内容区 -->
+            <ul class="gray-model-list" style="z-index: 2;">
+                <li class="line-btn hasChildren" id="expose">
+                    <img src="img/btn-cf.png" />
+                    <div class="line-content" id="exposeSlider">
+                        <div class="lineDiv" id="lineDiv1">
+                            <div class="minDiv" id="minDiv1">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="line-btn hasChildren">
+                    <img src="img/btn-changeBgColor.png" />
+                    <div class="line-content">
+                        <div class="color-content body-bg">
+                            <img src="img/model-detailBg1.png" />
+                        </div>
+                        <div class="color-content body-bg color-content-gray">
+                            <img src="img/model-detailBg2.png" />
+                        </div>
+                        <div class="color-content body-bg color-content-white">
+                            <img src="img/model-detailBg3.png" />
+                        </div>
+                    </div>
+                </li>
+                <li id="playbtn" class="line-btn">
+                    <img class="btn-play" src="img/btn-play.png" />
+                </li>
+                <li id="speedBtn" class="line-btn hasChildren">
+                    <img id="btnSpeed" class="img-state" src="img/btn-speed.png" />
+                    <div class="line-content line-model-start">
+                        <div class="color-content btn-state btn-state0">
+                            <img src="img/state-0.5.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state1">
+                            <img src="img/state-1.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state2">
+                            <img src="img/state-2.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state3">
+                            <img src="img/state-3.png" />
+                        </div>
+                    </div>
+                </li>
+                <li class="line-btn hasChildren">
+                    <img src="img/btn-light.png" />
+                    <div class="line-content" id="ambientSlider">
+                        <div class="lineDiv" id="lineDiv2">
+                            <div class="minDiv" style="left: 50%" id="minDiv2">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li id="btn-video-content" style="display: none;">
+                    <img class="btn-video" src="img/btn-video.png" />
+                    <img class="btn-video-none" src="img/btn-video-none.png" />
+                </li>
+            </ul>
+            <ul class="gray-model-left-list" style="z-index: 2;">
+                <li class="line-btn btn-one-content" id="btnTransparent">
+                    <img class="btn-normal" src="img/btn-clarity.png" />
+                    <img class="btn-active" src="img/btn-clarity-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnShowAll">
+                    <img class="btn-normal" src="img/btn-show.png" />
+                    <img class="btn-active" src="img/btn-show-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnSwitch">
+                    <img class="btn-normal" src="img/btn-showHide.png" />
+                    <img class="btn-active" src="img/btn-showHide-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnHide">
+                    <img class="btn-normal" src="img/btn-hide.png" />
+                    <img class="btn-active" src="img/btn-hide-active.png" />
+                </li>
+                <li class="line-btn btn-more-content" id="btnReset">
+                    <img class="btn-reset" src="img/btn-reset.png" />
+                    <img class="btn-reset-active" src="img/btn-reset-active.png" />
+                </li>
+                <li class="line-btn btn-more-content" id="btnMove">
+                    <img class="btn-move" src="img/btn-move.png" />
+                    <img class="btn-move-active" src="img/btn-move-active.png" />
+                </li>
+                <li>
+                    <img class="btn-handle" src="img/btn-handle.png" />
+                </li>
+            </ul>
+            <div class="model-msg-tips" style="display: none; border: none; border-radius: 20px; z-index: 2;">
+                请先选择模型
+            </div>
+        </div>
+    </div>
+</body>
+</html>

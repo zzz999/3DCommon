@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D仿真移动交互–迈向中国制造2025</title>
+    <link href="css/commonDemo.css" rel="stylesheet" />
+    <link href="css/sm.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/vconsole.min.js"></script>
+
+</head>
+
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <em id="pecentageText">0%</em>
+                <h2><span id="pecentageWidth"></span></h2>
+                <p class="Load-Sketch">眸瑞科技</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-group" style="background: none;">
+        <div class="page page-current" style="background: none;" id="mainContainer">
+           
+        </div>
+    </div>
+    <div class="rdbox" style="display: none;">
+        <div class="rdcontent"></div>
+        <span class="closeX">
+    </div>
+<script type="text/javascript" src="app.95602521570ffbfbc25e.js"></script></body>
+    <script>
+        window.vConsole = new window.VConsole();
+        $(function () {
+            var paths = {
+                m: ['u3d/helishi/m_part1.json', 'u3d/helishi/m_part2.json', 'u3d/helishi/m_part3.json'],
+                s: 'u3d/helishi/MeshData_tm.txt',
+                t:['u3d/helishi/t_1.txt','u3d/helishi/t_2.txt','u3d/helishi/t_3.txt','u3d/helishi/t_4.txt'],
+                e: 'u3d/helishi/MeshData_e.txt',
+                a: 'u3d/helishi/a_1.json'
+            }
+            var hotPoints= [
+                {
+                    "objName":"Object002",
+                    "pos": [2.617862837570416, 1.7679285318958633, 1.4481240745787949],
+                    "camPos": [6.310162577112652, 4.018926972448941, 3.6442491667792796],
+                    "camRot": [-0.834252537097077, 0.8606695497791736, 0.6964515483476451, "XYZ"],
+                    "userData": {
+                        "_index": 1
+                    }
+                },
+                {
+                    "objName":"Material #182",
+                    "pos": [-0.48199216203001316, -1.5527610721247915, -0.7879846909351979],
+                    "camPos": [-3.754037117467455, 0.3014448979808264, -5.222945087057139],
+                    "camRot": [-3.0839411087101016,  -0.622417236259894, -3.107957160055312, "XYZ"],
+                    "userData": {
+                        "_index": 2
+                    }
+                }
+            ]
+            //初始化构造函数
+            var viewer = new AMRTViewer('mainContainer',
+                //options
+                {
+                    scaleFactor: -1,
+                    initYFactor: 0.44,
+                    fogFactor:30,
+                    enablePan:true,
+                    cameraAngle:-8,
+                    mScaleFactor:-2
+                },
+                //plugins
+                {
+                    HotspotPlugin:{},
+                    // FullScreenPlugin:{}
+                    
+                    OperatePlugin:{}
+                });
+            viewer.setLoadingPage('loadingDiv', 'pecentageWidth', 'pecentageText');
+            viewer.onInited = function () {
+                viewer.loadModel(paths);
+                //监听网格加载完成
+                viewer.onMeshLoaded.add(function () {
+                    //设置背景
+                    viewer.setBackgroud("#1e1e28");
+                    //初始化UI
+                    initUI();
+                   
+                });
+                var curHotspot;
+                //监听所有贴图加载完成
+                viewer.onTextureLoaded.add(function () {
+                    viewer.onUpdate.add(function(){
+                        if(curHotspot && $('.rdbox:hidden').length === 0){
+                            $('.rdbox').css('left', curHotspot.screenPos.x + 'px').css('top', curHotspot.screenPos.y + 'px'); 
+                        }
+                    });
+                    viewer.HotspotPlugin.onAfterAddHotspot = function (hp) {
+                        var ele = $('<div class="dwdiv" style="top: ' + hp.screenPos.y + 'px; left: ' + hp.screenPos.x + 'px;transform: translate(-50%, -100%);"><span class="xuliebox">' + hp.userData._index + '</span><img src="img/rdimg.png"></div>');
+                        $('#mainContainer').append(ele);
+                        hp.ele = ele;
+
+                        ele.on('click', function () {
+                            // if(canClick){
+                            $('.rdcontent').text(hp.userData.content);
+                            viewer.HotspotPlugin.fitPosAndAngle(hp);
+                            curHotspot = hp;
+                            $('.rdbox').show();
+                            $('.rdbox').css('left', hp.screenPos.x + 'px').css('top', hp.screenPos.y + 'px'); 
+                            // }
+                        });
+
+                        hp.onUpdate = function (screenPos) {
+                            ele.css('left', screenPos.x + 'px').css('top', screenPos.y + 'px').css('transform', 'translate(-50%, -100%)');
+                        }
+                    };
+                    //添加热点
+                    hotPoints.forEach(function (item) {
+                         viewer.HotspotPlugin.addHotspot(item);
+                     });
+                });
+                //动画加载完成
+                viewer.onAnimationLoaded.add(function () {
+                    // viewer.playAnim(true);
+                    // viewer.HotspotPlugin.setAddState(true);
+                    // viewer.OperatePlugin.setOpState(true);
+                  
+                });
+            }
+
+            function initUI() {
+                var startEventType = ((document.ontouchstart !== null) ? 'mousedown' : 'touchstart'),
+                    moveEventType = ((document.ontouchmove !== null) ? 'mousemove' : 'touchmove'),
+                    endEventType = ((document.ontouchend !== null) ? 'mouseup' : 'touchend');
+
+                //窗口大小改变事件(有的浏览器只执行一次，有的执行两次。为防止不能拿到(特别是只执行一次的时候)准确的值，故延迟执行尺寸改变操作)
+                var isResizing = false;
+                window.addEventListener('resize', function () {
+                    if (!isResizing) {
+                        setTimeout(function () {
+                            if (viewer.scene) {
+                                // setSceneBg();
+                                viewer.setBackgroud("#1e1e28");
+                            }
+                            isResizing = false;
+                        }, 100);
+                    }
+                    isResizing = true;
+                }, false);
+            }
+        });
+
+    </script>
+
+</html>

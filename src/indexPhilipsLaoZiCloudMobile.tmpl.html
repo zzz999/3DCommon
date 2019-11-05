@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Philips剃须刀</title>
+    <link rel="stylesheet" type="text/css" href="css/mobile/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobile/txd.css" />
+    <style>
+        html,
+        body
+        {
+            width: 100%;
+            height: 100%;
+            background-color: #ddd;
+            overflow: auto;
+        }
+    </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/adapt.js"></script>
+    <script src="js/opentype.min.js"></script>
+    <script>
+        var Api = {
+            prefix: ''
+        };
+
+        var paths = {
+            m: ['u3d/tixudao/models/m_part1.json', 'u3d/tixudao/models/m_part2.json'],
+            s: 'u3d/tixudao/tm.txt',
+            t: [
+                'u3d/tixudao/textures/t_1.txt',
+                'u3d/tixudao/textures/t_2.txt',
+                'u3d/tixudao/textures/t_3.txt',
+                'u3d/tixudao/textures/t_4.txt'
+            ],
+            e:'u3d/tixudao/envmap/e.txt'
+            //{
+            //    'name': 'skybox',
+            //    'urls': ['u3d/tixudao/envmap/e/px.hdr', 'u3d/tixudao/envmap/e/nx.hdr', 'u3d/tixudao/envmap/e/py.hdr', 'u3d/tixudao/envmap/e/ny.hdr', 'u3d/tixudao/envmap/e/pz.hdr', 'u3d/tixudao/envmap/e/nz.hdr']
+            //}
+        };
+    </script>
+</head>
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <img src="img/img/logo.png" alt="">
+                <h2><span id="pecentageWidth" style="width: 0%"></span></h2>
+                <em>Loading......</em>
+            </div>
+        </div>
+    </div>
+    <div class="guidetips">
+        <img src="img/img/zhezhao.png">
+    </div>
+    <div class="container model-detail">
+        <div class="modelBox" style="background: none;" id="mainContainer">
+        </div>
+        <ul class="bottomTab">
+            <li class="active ks">
+                <img src="img/img/text.png" alt="">
+                <img src="img/img/text-active.png" alt="">
+                <p>款式</p>
+            </li>
+            <li class="ys">
+                <img src="img/img/color.png" alt="">
+                <img src="img/img/color-active.png" alt="">
+                <p>颜色</p>
+            </li>
+            <li class="wz">
+                <img src="img/img/style.png" alt="">
+                <img src="img/img/style-active.png" alt="">
+                <p>文字</p>
+            </li>
+        </ul>
+        <ul class="productsList clearfix">
+            <li class="fl active">
+                <img src="img/img/ks02.png" alt=""></li>
+            <li class="fr">
+                <img src="img/img/ks01.png" alt=""></li>
+        </ul>
+        <ul class="colorList clearfix" style="display: none">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="textList" style="display: none">
+            <li class="active" id="liCenter" style="display: none;">
+                <input id="iptCenterText" type="text" maxlength="24" placeholder="请输入顶部文字">
+                <div><span>0</span>/24</div>
+            </li>
+            <li id="liLeft">
+                <input id="iptLeftText" type="text" maxlength="10" placeholder="请输入左侧文字">
+                <div><span>0</span>/10</div>
+            </li>
+            <li id="liRight">
+                <input id="iptRightText" type="text" maxlength="10" placeholder="请输入右侧文字">
+                <div><span>0</span>/10</div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    $(function () {
+        var firstEntry = localStorage.getItem('firstEntry');
+        if (firstEntry == null) {
+            $(".guidetips").show();
+            localStorage.setItem('firstEntry', 'pengyao');
+        } else {
+            $(".guidetips").hide();
+        }
+        $(".guidetips").on("click", function () {
+            $(this).hide();
+        })
+
+        $(".bottomTab li").on("click", function () {
+            $(this).addClass("active").siblings().removeClass('active');
+            if ($(this).hasClass("ks")) {
+                $(".productsList").show();
+                $(".colorList").hide();
+                $(".textList").hide();
+                $(".controList").hide();
+            } else if ($(this).hasClass("ys")) {
+                $(".colorList").show();
+                $(".productsList").hide();
+                $(".textList").hide();
+                $(".controList").hide();
+            } else if ($(this).hasClass("wz")) {
+                $(".textList").show();
+                $(".controList").show();
+                $(".productsList").hide();
+                $(".colorList").hide();
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D仿真移动交互–迈向中国制造2025</title>
+    <link rel="stylesheet" type="text/css" href="css/pc/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/pc/txd.css" />
+    <style>
+        html,
+        body
+        {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            overflow: auto;
+        }
+    </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        var Api = {
+            prefix: '',
+            removeLogo: true
+        };
+
+        var paths = {
+            m: ['u3d/tixudao/models/m_part1.json', 'u3d/tixudao/models/m_part2.json'],
+            s: 'u3d/tixudao/tm.txt',
+            t: [
+                'u3d/tixudao/textures/t_1.txt',
+                'u3d/tixudao/textures/t_2.txt',
+                'u3d/tixudao/textures/t_3.txt',
+                'u3d/tixudao/textures/t_4.txt'
+            ],
+            e: {
+                'name': 'skybox',
+                'urls': ['u3d/tixudao/envmap/e/px.hdr', 'u3d/tixudao/envmap/e/nx.hdr', 'u3d/tixudao/envmap/e/py.hdr', 'u3d/tixudao/envmap/e/ny.hdr', 'u3d/tixudao/envmap/e/pz.hdr', 'u3d/tixudao/envmap/e/nz.hdr']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <img src="img/img/logo02.png" alt="">
+                <h2><span id="pecentageWidth" style="width: 0%;"></span></h2>
+                <em id="pecentageText">Loading......</em>
+            </div>
+        </div>
+    </div>
+    <div class="guidetips" style="display:none;">
+        <img src="img/img/mc02.png" alt="" class="guide-pc">
+    </div>
+    <div class="container model-detail">
+        <div class="modelBox fl" style="background: none;" id="mainContainer"></div>
+        <div class="modelContro fr">
+            <p>产品款式 PRODUCT STYLE</p>
+            <ul class="productsList">
+                <li class="active">
+                    <i></i>
+                    <img src="img/img/ks02.png" alt="">
+                </li>
+                <li>
+                    <i></i>
+                    <img src="img/img/ks01.png" alt="">
+                </li>
+            </ul>
+            <p>产品颜色 PRODUCT COLOR</p>
+            <ul class="colorList clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <p>文字设置 TEXT SETTINGS:</p>
+            <ul class="textList">
+                <li id="liCenter" style="display: none;">
+                    <p>顶部文字 <span>0</span>/24</p>
+                    <input id="iptCenterText" type="text" maxlength="24">
+                </li>
+                <li id="liLeft">
+                    <p>左侧文字 <span>0</span>/10</p>
+                    <input id="iptLeftText" type="text" maxlength="10">
+                </li>
+                <li id="liRight">
+                    <p>右侧文字 <span>0</span>/10</p>
+                    <input id="iptRightText" type="text" maxlength="10">
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        var firstEntry = localStorage.getItem('firstEntry');
+        if (firstEntry == null) {
+            $(".guidetips").show();
+            localStorage.setItem('firstEntry', 'pengyao');
+        } else {
+            $(".guidetips").hide();
+        }
+        $(".guidetips").on("click", function () {
+            $(this).hide();
+        })
+    });
+</script>
+</html>

@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>易游无限</title>
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/sm.min.css" rel="stylesheet" />
+    <link href="js/fancytree/skin-lion/ui.fancytree.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/fancytree/jquery.fancytree-all-deps.js"></script>
+    <script>
+        //开发者授权信息
+        var AMRTConfig = {
+            developer:{           
+                developerID: '21640235',
+                appID: 'qspNARcmGfET',
+                secretKey: 'pmYekORCXv475WPdUuloSFTcs2ajxKg6',
+            }           
+        };
+
+        var modelPaths = {
+            m: "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/07858c07-9562-48f9-ae5d-3520f2bab990.json.gz",
+            a: "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/21b6de9e-d1c0-44bb-976b-2cf99d57667b.json.gz",
+            s: "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/82d8ad35-4a4b-490d-92cc-f2f16da101d6.txt",
+            t: [
+                "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/318c9948-8c1f-4765-85a3-f4cb03713984.txt"
+
+                , "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/0a79d1df-e726-4d76-8e85-043bc0166407.txt"
+
+                , "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/cfa2ddcc-01a5-469f-8f68-9c0a675be01f.txt"
+            ],
+            e: "https://laozi-auto-east.obs.cn-east-2.myhuaweicloud.com:443/zuixinenvmap.json",
+        };
+    </script>
+</head>
+<body>
+    <div class="Load-bg" id="loadingDiv">
+        <div class="Load-tex">
+            <div class="Load-logo">
+                <em id="pecentageText">0%</em>
+                <h2><span id="pecentageWidth"></span></h2>
+                <p class="Load-Sketch">眸瑞科技</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-group" style="background: none;">
+        <div class="page page-current" style="background: none;" id="mainContainer">
+            <!-- 这里是页面内容区 -->
+            <ul class="gray-model-list" style="z-index: 2;">
+                <li class="line-btn hasChildren" id="expose">
+                    <img src="img/btn-cf.png" />
+                    <div class="line-content" id="exposeSlider">
+                        <div class="lineDiv" id="lineDiv1">
+                            <div class="minDiv" id="minDiv1">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="line-btn hasChildren" id="bgbtn">
+                    <img src="img/btn-changeBgColor.png" />
+                    <div class="line-content">
+                        <div class="color-content body-bg">
+                            <img src="img/model-detailBg1.png" />
+                        </div>
+                        <div class="color-content body-bg color-content-gray">
+                            <img src="img/model-detailBg2.png" />
+                        </div>
+                        <div class="color-content body-bg color-content-white">
+                            <img src="img/model-detailBg3.png" />
+                        </div>
+                    </div>
+                </li>
+                <li id="playbtn" class="line-btn">
+                    <img class="btn-play" src="img/btn-play.png" />
+                </li>
+                <li id="speedBtn" class="line-btn hasChildren">
+                    <img id="btnSpeed" class="img-state" src="img/btn-speed.png" />
+                    <div class="line-content line-model-start">
+                        <div class="color-content btn-state btn-state0">
+                            <img src="img/state-0.5.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state1">
+                            <img src="img/state-1.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state2">
+                            <img src="img/state-2.png" />
+                        </div>
+                        <div class="color-content btn-state btn-state3">
+                            <img src="img/state-3.png" />
+                        </div>
+                    </div>
+                </li>
+                <li id="strubtn" class="line-btn">
+                    <img class="btn-stru" src="img/btn-stru.png" />
+                </li>
+                <li id="lightbtn"  class="line-btn hasChildren">
+                    <img src="img/btn-light.png" />
+                    <div class="line-content" id="ambientSlider">
+                        <div class="lineDiv" id="lineDiv2">
+                            <div class="minDiv" style="left: 50%" id="minDiv2">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="gray-model-left-list" style="z-index: 2;">
+                <li class="line-btn btn-one-content" id="btnTransparent">
+                    <img class="btn-normal" src="img/btn-clarity.png" />
+                    <img class="btn-active" src="img/btn-clarity-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnShowAll">
+                    <img class="btn-normal" src="img/btn-show.png" />
+                    <img class="btn-active" src="img/btn-show-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnSwitch">
+                    <img class="btn-normal" src="img/btn-showHide.png" />
+                    <img class="btn-active" src="img/btn-showHide-active.png" />
+                </li>
+                <li class="line-btn btn-one-content" id="btnHide">
+                    <img class="btn-normal" src="img/btn-hide.png" />
+                    <img class="btn-active" src="img/btn-hide-active.png" />
+                </li>
+                <li class="line-btn btn-more-content" id="btnReset">
+                    <img class="btn-reset" src="img/btn-reset.png" />
+                    <img class="btn-reset-active" src="img/btn-reset-active.png" />
+                </li>
+                <li class="line-btn btn-more-content" id="btnMove">
+                    <img class="btn-move" src="img/btn-move.png" />
+                    <img class="btn-move-active" src="img/btn-move-active.png" />
+                </li>
+                <li>
+                    <img class="btn-handle" src="img/btn-handle.png" />
+                </li>
+            </ul>
+            <div class="model-msg-tips" style="display: none; border: none; border-radius: 20px; z-index: 2;">
+                请先选择模型
+            </div>
+            <div class="jgdiv">
+                <p>结构</p>
+                <div class="jgmc">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

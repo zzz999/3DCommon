@@ -1,0 +1,590 @@
+/* loading样式 */
+
+.Load-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 999999;
+    background: none;
+    /* background-color: transparent; */
+    background: url(../img/wrj/bg.jpg) no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+}
+
+.Load-tex {
+    width: 100%;
+    height: 100%;
+    color: #b3b3b3;
+    display: table;
+}
+
+.Load-logo {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 0.3rem;
+}
+
+.Load-logo img {
+    width: 3.5rem;
+}
+
+.Load-logo h2 {
+    width: 5rem;
+    margin: 0.2rem auto 0.2rem auto;
+    height: 0.14rem;
+    position: relative;
+    /* background-color: #b3b3b3; */
+    /* border-radius: 0.14rem; */
+    border: 0.01rem solid #ff742f;
+}
+
+.Load-logo h2 em {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #b3b3b3;
+    font-size: 0.26rem;
+}
+
+.Load-logo h2 span {
+    height: 0.12rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #007ec3;
+    z-index: 1;
+    background-color: #ff742f;
+    /* border-radius: 0.14rem; */
+}
+
+.modelbox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    /* background-color: #000; */
+    z-index: 0;
+}
+
+.model-detail {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.bottomtablist {
+    position: absolute;
+    width: 100%;
+    height: 0.77rem;
+    bottom: 0.4rem;
+    left: 0;
+    display: flex;
+    text-align: center;
+    padding: 0 0.4rem;
+    box-sizing: border-box;
+}
+
+.bottomtablist li {
+    float: left;
+    width: 20%;
+    height: 0.77rem;
+    border-right: 0.01rem solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.bottomtablist li:last-child {
+    border: none;
+}
+
+.bottomtablist li img {
+    height: 100%;
+}
+
+.bottomtablist li img.activeimg {
+    display: none;
+}
+
+.bottomtablist li.active img {
+    display: none;
+}
+
+.bottomtablist li.active img.activeimg {
+    display: inline-block;
+}
+
+.xjlist {
+    position: absolute;
+    width: 5.1rem;
+    height: 0.1rem;
+    bottom: 1.8rem;
+    left: calc(50% - 2.55rem);
+}
+
+.xjlist li {
+    float: left;
+    width: 0.9rem;
+    height: 0.1rem;
+    border: 0.01rem solid #ccc;
+    margin-right: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.xjlist li:last-child {
+    margin-right: 0;
+}
+
+.xjlist li.active {
+    background-color: #ff742f;
+    border-color: #ff742f;
+}
+
+.toplogo {
+    position: absolute;
+    width: 4.3rem;
+    height: 0.58rem;
+    left: calc(50% - 2.15rem);
+    top: 0.5rem;
+}
+
+.toplogo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.backhome {
+    position: absolute;
+    top: 0.2rem;
+    right: 0;
+    width: 0.88rem;
+    height: 0.88rem;
+}
+
+.backhome img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.textexplan {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.textexplan h3 {
+    font-size: 0.3rem;
+    color: #ff742f;
+}
+
+.textexplan h4 {
+    font-size: 0.22rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.colorlist {
+    position: absolute;
+    bottom: 1.8rem;
+    left: calc(50% - 2.8rem);
+    width: 5.6rem;
+    height: 0.6rem;
+    text-align: center;
+    padding: 0 0.05rem;
+    display: none;
+}
+
+.colorlist li {
+    float: left;
+    width: 1.5rem;
+    height: 0.57rem;
+    line-height: 0.57rem;
+    margin-right: 0.5rem;
+    font-size: 0.26rem;
+    color: #999;
+    background-color: #e6e6e6;
+    box-shadow: 0.03rem 0.03rem 0.03rem #999;
+    cursor: pointer;
+}
+
+.colorlist li:last-child {
+    margin-right: 0;
+}
+
+.colorlist li.kxh.active {
+    color: #000;
+}
+
+.colorlist li.ssb.active {
+    color: #fff;
+}
+
+.colorlist li.llc.active {
+    color: #ff742f;
+}
+
+.rightlist {
+    position: absolute;
+    width: 0.88rem;
+    right: 0;
+    top: 1.14rem;
+    height: auto;
+    display: none;
+}
+
+.rightlist li {
+    width: 0.88rem;
+    height: 0.88rem;
+    margin-bottom: 0.1rem;
+    cursor: pointer;
+}
+
+.rightlist li img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.rightlist li img.optactimg {
+    display: none;
+}
+
+.rightlist li img.optactimg {
+    display: none;
+}
+
+.rightlist li.active img.optimg {
+    display: none;
+}
+
+.rightlist li.active img.optactimg {
+    display: block;
+}
+
+.rightlist li.rightli {
+    position: relative;
+}
+
+.rightlist li.rightli .rightliul {
+    position: absolute;
+    height: 0.55rem;
+    width: max-content;
+    top: 0.02rem;
+    right: 0.9rem;
+    display: none;
+}
+
+.rightlist li.rightli .rightliul div {
+    width: 0.55rem;
+    height: 0.55rem;
+    float: left;
+    margin-right: 0.2rem;
+}
+
+.rightlist li.rightli .rightliul div:last-child {
+    margin-right: 0;
+}
+
+.rightlist li.rightli .rightliul div img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.rightlist li.rightli .rightliul div img.actimg {
+    display: none;
+}
+
+.rightlist li.rightli .rightliul div.active img {
+    display: none;
+}
+
+.rightlist li.rightli .rightliul div.active img.actimg {
+    display: block;
+}
+
+.paizhao {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    bottom: 1.8rem;
+    left: calc(50% - 0.5rem);
+    display: none;
+    cursor: pointer;
+}
+
+.paizhao img {
+    width: 100%;
+    height: 100%;
+}
+
+.hotlist li {
+    position: absolute;
+    width: 0.14rem;
+    height: 0.14rem;
+    border-radius: 50%;
+    background-color: #ff742f;
+    z-index: 9999;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 16px #fff; */
+}
+
+.hotlist li .modelpartname {
+    position: absolute;
+    top: -0.62rem;
+    left: -1.51rem;
+    width: 1.4rem;
+    color: #ff742f;
+    font-size: 0.26rem;
+    text-align: center;
+}
+
+.hotlist li.toright:after {
+    top: -0.27rem;
+    left: 0.18rem;
+    transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -webkit-transform: rotate(30deg);
+    -o-transform: rotate(-30deg);
+}
+
+.hotlist li.toright:before {
+    left: 0.26rem;
+}
+
+.hotlist li.toright .modelpartname {
+    left: 0.26rem;
+}
+
+@keyframes living {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 0;
+        /*圆形放大的同时，透明度逐渐减小为0*/
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.hotlist li span {
+    position: absolute;
+    width: 0.14rem;
+    height: 0.14rem;
+    left: 0;
+    bottom: 0;
+    background: #ff742f;
+    border-radius: 50%;
+    -webkit-animation: living 3s linear infinite;
+    z-index: -1;
+}
+
+.hotlist li span:nth-child(2) {
+    -webkit-animation-delay: 1.5s;
+    /*第二个span动画延迟1.5秒*/
+}
+
+.nopower {
+    position: absolute;
+    top: 1.4rem;
+    right: calc(50% - 0.42rem);
+    width: 0.84rem;
+    height: 0.98rem;
+    animation: fade 600ms infinite;
+    -webkit-animation: fade 600ms infinite;
+    display: none;
+}
+
+.nopower img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nopower img.mobileimg {
+    display: block;
+}
+
+.nopower img.pcimg {
+    display: none;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+.poppic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index:9999;
+}
+
+.results {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 10%;
+    left: 10%;
+}
+
+.results img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 1024px) {
+    .Load-bg {
+        background-image: url(../img/wrj/bg-pc.jpg)
+    }
+    .Load-logo img {
+        width: 314px;
+    }
+    .Load-logo h2 {
+        height: 12px;
+    }
+    .Load-logo h2 span {
+        height: 10px;
+    }
+    .backhome {
+        display: none;
+    }
+    .xjlist {
+        width: 410px;
+        height: 6px;
+        left: calc(50% - 205px);
+    }
+    .xjlist li {
+        width: 80px;
+        height: 6px;
+        margin-right: 30px;
+    }
+    .textexplan {
+        top: 50px;
+    }
+    .textexplan h3 {
+        font-size: 22px;
+    }
+    .textexplan h4 {
+        font-size: 16px;
+    }
+    .toplogo {
+        width: 534px;
+        height: 70px;
+        left: calc(50% - 267px);
+    }
+    .bottomtablist {
+        width: 650px;
+        left: calc(50% - 325px);
+    }
+    .bottomtablist li {
+        height: 68px;
+    }
+    .colorlist {
+        width: 300px;
+        height: 30px;
+        left: calc(50% - 150px);
+        padding: 0 5px;
+    }
+    .colorlist li {
+        width: 80px;
+        height: 27px;
+        line-height: 27px;
+        box-shadow: 3px 3px 3px #999;
+        margin-right: 25px;
+        font-size: 14px;
+    }
+    .rightlist {
+        width: 64px;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .rightlist li {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 10px;
+    }
+    .rightlist li.rightli .rightliul {
+        height: 40px;
+        width: max-content;
+        top: 0px;
+        right: 60px;
+    }
+    .rightlist li.rightli .rightliul div {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+    .nopower {
+        width: 128px;
+        height: 61px;
+        right: 20px;
+        top: 20px;
+    }
+    .nopower img.mobileimg {
+        display: none;
+    }
+    .nopower img.pcimg {
+        display: block;
+    }
+    .paizhao {
+        width: 68px;
+        height: 68px;
+        left: calc(50% - 34px);
+        bottom: 160px;
+    }
+    .results {
+        width: 900px;
+        height: 500px;
+        top: calc(50% - 250px);
+        left: calc(50% - 450px);
+    }
+}
